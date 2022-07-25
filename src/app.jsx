@@ -1,29 +1,26 @@
 import React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from 'react-router-dom';
 import Navbar from './components/navbar';
+import HomePage from './pages/home-page';
+import WorldCitiesPage from './pages/world-cities-page';
+import ErrorPage from './pages/error-page';
 
 const App = () => {
   return (
-    <div>
+    <BrowserRouter>
       <Navbar />
-      <Stack spacing={2} direction="row">
-      <Button variant="contained"><HistoryToggleOffIcon/></Button>
-      <Button variant="text">Text</Button>
-      <Button 
-      variant="contained"
-      startIcon={<HistoryToggleOffIcon />}
-      >Contained</Button>
-      <Button 
-      variant="outlined"
-      endIcon={<HistoryToggleOffIcon />}
-      >Outlined</Button>
-      </Stack>
-    </div>
+        <Routes>
+          <Route path="/world-cities" element={<WorldCitiesPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+    </BrowserRouter>
   );
 }
-
 
 export default App;
 
