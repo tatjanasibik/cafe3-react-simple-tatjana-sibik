@@ -21,7 +21,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" sx={{ zIndex: 1300}} >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <IconButton
           size="large"

@@ -8,6 +8,8 @@ export const Link = styled(NavLink)(({theme}) => ({
     padding: theme.spacing(0, 2),
     textDecoration: 'none',
     color: theme.palette.grey[200],
+    zIndex: 9000,
+  
   
     '&.active': {
       boxShadow: `inset 0 -4px 0 ${theme.palette.common.white}`,

@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Box, TextField, Paper, Button, Typography, MenuItem } from '@mui/material';
+import { Box, TextField, Paper, Button, Typography, MenuItem, Drawer, Divider, IconButton, useMediaQuery } from '@mui/material';
+import TuneIcon from '@mui/icons-material/Tune';
+import theme from '../../styles/theme';
 
 const choices = [
     {
@@ -13,12 +15,16 @@ const choices = [
 
 ];
 
+const drawerWidth = 280;
+
 const ContactPage = () => {
     const [fullname, setFullname] = React.useState('Vardas');
     const [email, setEmail] = React.useState('Email');
     const [choice, setChoice] = React.useState(choices[0]);
+    const [drawerOpen, setDrawerOpen] = React.useState(false);
+    const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up('xxl'));
     return (
-        <Box sx={{ pt: 7 }}>
+        <Box sx={{ display: 'flex', gap: 2, py: 11, px: 4 }}>
             <Paper
                 elevation={3}
                 sx={{
@@ -69,12 +75,46 @@ const ContactPage = () => {
                         value={choice}
                     >
                         {
-                            choices.map(({value, label}) => <MenuItem key={value} value={value}>{label}"</MenuItem>)
+                            choices.map(({ value, label }) => <MenuItem key={value} value={value}>{label}"</MenuItem>)
                         }
                     </TextField>
                     <Button type="submit" variant="contained" size="large">Patvirtinti duomenis</Button>
                 </Box>
             </Paper>
+            <Box sx={{
+                display: 'flex', gap: 4, pt: 11, px: 4,
+            }}>
+                <IconButton
+                    size="large"
+                    color="primary"
+                    variant="contained"
+                    sx={{
+                        position: 'fixed',
+                        bottom: 15,
+                        right: 15,
+                        zIndex: 5000,
+                        height: 60,
+                        width: 60,
+                        borderRadius: '50%',
+                        display: { xxl: 'none' },
+                    }}
+                    onClick={() => setDrawerOpen(!drawerOpen)}
+                >
+                    <TuneIcon />
+                </IconButton>
+                <Drawer
+                    anchor='right'
+                    variant={isExtraLarge ? "persistent" : "temporary"}
+                    open={isExtraLarge || drawerOpen}
+                    onClose={() => setDrawerOpen(false)}
+                >
+                    <Box sx={{ width: drawerWidth, p: 3, ...theme.mixins.toolbarOffset }}>
+                        <Box sx={(theme) => theme.mixins.toolbarOffset} />
+                        <Typography variant='h4'>Filtrai</Typography>
+                        <Divider />
+                    </Box>
+                </Drawer>
+            </Box>
         </Box>
     );
 };
