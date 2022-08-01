@@ -1,5 +1,18 @@
 import * as React from 'react';
-import { Box, TextField, Paper, Button, Typography, MenuItem, Drawer, Divider, IconButton, useMediaQuery } from '@mui/material';
+import {
+    Box,
+    TextField,
+    Paper,
+    Button,
+    Typography,
+    MenuItem,
+    Drawer,
+    Divider,
+    IconButton,
+    useMediaQuery,
+    Slider,
+    FormControl,
+} from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 import theme from '../../styles/theme';
 
@@ -22,6 +35,7 @@ const ContactPage = () => {
     const [email, setEmail] = React.useState('Email');
     const [choice, setChoice] = React.useState(choices[0]);
     const [drawerOpen, setDrawerOpen] = React.useState(false);
+    const [kmRange, setKmRange] = React.useState([0, 50000]);
     const isExtraLarge = useMediaQuery((theme) => theme.breakpoints.up('xxl'));
     return (
         <Box sx={{ display: 'flex', gap: 2, py: 11, px: 4 }}>
@@ -110,8 +124,19 @@ const ContactPage = () => {
                 >
                     <Box sx={{ width: drawerWidth, p: 3, ...theme.mixins.toolbarOffset }}>
                         <Box sx={(theme) => theme.mixins.toolbarOffset} />
-                        <Typography variant='h4'>Filtrai</Typography>
-                        <Divider />
+                        <Typography variant='h4'>Filtras</Typography>
+                        <Divider sx={{ my: 2 }} />
+                        <FormControl sx={{ width: '100%' }}>
+                            <Typography variant="h6" sx={{}}>Atstumas nuo Jūsų dabartinės vietos, km</Typography>
+                            <Slider
+                                value={kmRange}
+                                min={0}
+                                max={50000}
+                                onChange = {(_, newKmRange) => setKmRange(newKmRange)}
+                                valueLabelDisplay="on"
+                                sx={{mt: 4}}
+                            />
+                        </FormControl>
                     </Box>
                 </Drawer>
             </Box>
