@@ -14,7 +14,7 @@ const pages = [
   { text: 'Pagrindinis', to: '/' },
   { text: 'Pasaulio miestai', to: '/world-cities' },
   { text: 'Nuotraukos', to: '/pictures' },
-  { text: 'Kontaktai', to: '/contacts' },
+  { text: 'Kontaktai', to: '/contact' },
 ];
 
 const Navbar = () => {

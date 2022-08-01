@@ -11,6 +11,7 @@ import ErrorPage from './pages/error-page';
 import CartContext from './contexts/cart-context';
 import PotteryPage from './pages/pottery-page';
 import CartPage from './pages/cart-page';
+import ContactPage from './pages/contact-page';
 
 const App = () => (
   <BrowserRouter>
@@ -18,12 +19,11 @@ const App = () => (
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-
         <Route path="/world-cities" element={<WorldCitiesPage />} />
         <Route path="/pottery" element={<PotteryPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         
-
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </CartContext.Provider>
