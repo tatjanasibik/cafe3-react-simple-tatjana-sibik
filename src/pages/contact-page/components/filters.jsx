@@ -11,6 +11,10 @@ import {
     IconButton,
     Autocomplete,
     TextField,
+    FormLabel,
+    RadioGroup,
+    FormControlLabel,
+    Radio,
 } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 import theme from '../../../styles/theme';
@@ -19,6 +23,13 @@ const categories = [
     { id: '1', label: 'America' },
     { id: '2', label: 'Asia' },
     { id: '3', label: 'Europe' },
+];
+
+const reasons = [
+    { value: 'I am leaving there', label: 'gyvenu ten' },
+    { value: 'My ... leaves there', label: 'ten gynena mano giminės' },
+    { value: 'Ill travel there', label: 'keliausiu ten' },
+    { value: 'Just for fun', label: 'tiesiog įdomu' },
 ]
 
 const Filters = () => {
@@ -27,6 +38,7 @@ const Filters = () => {
     const [drawerOpen, setDrawerOpen] = React.useState(false);
     const [kmRange, setKmRange] = React.useState([0, 50000]);
     const [category, setCategory] = React.useState(null);
+    const [reason, setReason] = React.useState(null);
 
     return (
         <>
@@ -80,24 +92,34 @@ const Filters = () => {
                         renderInput={({
                             InputLabelProps,
                             InputProps,
-                            disabled,
                             fullWidth,
                             id,
                             inputProps,
-                            size,
                         }) => (
                             <TextField
                                 InputLabelProps={InputLabelProps}
                                 InputProps={InputProps}
-                                disabled={disabled}
                                 fullWidth={fullWidth}
                                 id={id}
                                 inputProps={inputProps}
-                                size={size}
                                 label="Kategorija"
                             />
                         )}
                     />
+                    <Divider sx={{ my: 2 }} />
+                    <FormControl>
+                        <FormLabel>Domiuosi, nes...</FormLabel>
+                        <RadioGroup
+                            name="reason"
+                            value={reason}
+                            onChange={(_, newReason) => setReason(newReason)}
+                        >
+                            {reasons.map(
+                                ({ value, label }) => 
+                                <FormControlLabel value={value} control={<Radio />} label={label} />
+                            )}
+                        </RadioGroup>
+                    </FormControl>
                 </Box>
             </Drawer>
         </>
