@@ -15,6 +15,8 @@ import {
     RadioGroup,
     FormControlLabel,
     Radio,
+    Button,
+    Checkbox,
 } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 import theme from '../../../styles/theme';
@@ -39,6 +41,7 @@ const Filters = () => {
     const [kmRange, setKmRange] = React.useState([0, 50000]);
     const [category, setCategory] = React.useState(null);
     const [reason, setReason] = React.useState(null);
+    const [subscribe, setSubscribe] = React.useState(true);
 
     return (
         <>
@@ -73,14 +76,16 @@ const Filters = () => {
                     <Divider sx={{ my: 2 }} />
                     <FormControl sx={{ width: '100%' }}>
                         <Typography variant="h6" sx={{}}>Atstumas nuo Jūsų dabartinės vietos, km</Typography>
-                        <Slider
-                            value={kmRange}
-                            min={0}
-                            max={50000}
-                            onChange={(_, newKmRange) => setKmRange(newKmRange)}
-                            valueLabelDisplay="on"
-                            sx={{ mt: 4 }}
-                        />
+                        <Box sx={{ mx: 2 }}>
+                            <Slider
+                                value={kmRange}
+                                min={0}
+                                max={50000}
+                                onChange={(_, newKmRange) => setKmRange(newKmRange)}
+                                valueLabelDisplay="on"
+                                sx={{ mt: 4 }}
+                            />
+                        </Box>
                     </FormControl>
                     <Divider sx={{ my: 2 }} />
                     <Autocomplete
@@ -115,11 +120,25 @@ const Filters = () => {
                             onChange={(_, newReason) => setReason(newReason)}
                         >
                             {reasons.map(
-                                ({ value, label }) => 
-                                <FormControlLabel value={value} control={<Radio />} label={label} />
+                                ({ value, label }) =>
+                                    <FormControlLabel value={value} control={<Radio />} label={label} />
                             )}
                         </RadioGroup>
                     </FormControl>
+                    <Divider sx={{ my: 2 }} />
+                    <Box>
+                        <FormControlLabel
+                            control={(
+                                <Checkbox
+                                    value={subscribe}
+                                    onChange={(_, newSubscribe) => setSubscribe(newSubscribe)}
+                                />
+                            )}
+                            label="Papildomai siųsti oro temperatūrą">
+
+                        </FormControlLabel>
+                    </Box>
+                    <Button type="submit" variant="contained" size="large">Patvirtinti</Button>
                 </Box>
             </Drawer>
         </>
